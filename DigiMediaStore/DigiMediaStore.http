@@ -1,0 +1,41 @@
+@DigiMediaStore_HostAddress = http://localhost:5200
+
+### Получить все медиа-названия
+GET {{DigiMediaStore_HostAddress}}/Media/
+Accept: application/json
+
+### Получить все медиа-названия (сортировка по возрастанию)
+GET {{DigiMediaStore_HostAddress}}/Media/?sortStrategy=1
+Accept: application/json
+
+### Получить все медиа-названия (сортировка по убыванию)
+GET {{DigiMediaStore_HostAddress}}/Media/?sortStrategy=-1
+Accept: application/json
+
+### Получить медиа-название по индексу
+GET {{DigiMediaStore_HostAddress}}/Media/0
+Accept: application/json
+
+### Найти количество записей по имени
+GET {{DigiMediaStore_HostAddress}}/Media/find-by-name?name=Inception
+Accept: application/json
+
+### Добавить новое медиа-название
+POST {{DigiMediaStore_HostAddress}}/Media/
+Content-Type: application/x-www-form-urlencoded
+
+name=New Movie Title
+
+### Обновить медиа-название по индексу
+PUT {{DigiMediaStore_HostAddress}}/Media/
+Content-Type: application/x-www-form-urlencoded
+
+index=0&name=Updated Movie Title
+
+### Удалить медиа-название по индексу
+DELETE {{DigiMediaStore_HostAddress}}/Media/
+Content-Type: application/x-www-form-urlencoded
+
+index=0
+
+###
