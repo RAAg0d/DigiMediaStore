@@ -1,41 +1,103 @@
 @DigiMediaStore_HostAddress = http://localhost:5200
 
-### Получить все медиа-названия
-GET {{DigiMediaStore_HostAddress}}/Media/
+### Получить весь медиа-контент
+GET {{DigiMediaStore_HostAddress}}/api/Media/
 Accept: application/json
 
-### Получить все медиа-названия (сортировка по возрастанию)
-GET {{DigiMediaStore_HostAddress}}/Media/?sortStrategy=1
+### Поиск медиа-контента
+GET {{DigiMediaStore_HostAddress}}/api/Media/?search=Inception
 Accept: application/json
 
-### Получить все медиа-названия (сортировка по убыванию)
-GET {{DigiMediaStore_HostAddress}}/Media/?sortStrategy=-1
+### Фильтр по типу контента
+GET {{DigiMediaStore_HostAddress}}/api/Media/?typeId=1
 Accept: application/json
 
-### Получить медиа-название по индексу
-GET {{DigiMediaStore_HostAddress}}/Media/0
+### Фильтр по жанру
+GET {{DigiMediaStore_HostAddress}}/api/Media/?genreId=1
 Accept: application/json
 
-### Найти количество записей по имени
-GET {{DigiMediaStore_HostAddress}}/Media/find-by-name?name=Inception
+### Сортировка по названию (по возрастанию)
+GET {{DigiMediaStore_HostAddress}}/api/Media/?sortBy=1
 Accept: application/json
 
-### Добавить новое медиа-название
-POST {{DigiMediaStore_HostAddress}}/Media/
-Content-Type: application/x-www-form-urlencoded
+### Сортировка по цене (по убыванию)
+GET {{DigiMediaStore_HostAddress}}/api/Media/?sortBy=-2
+Accept: application/json
 
-name=New Movie Title
+### Получить контент по ID
+GET {{DigiMediaStore_HostAddress}}/api/Media/1
+Accept: application/json
 
-### Обновить медиа-название по индексу
-PUT {{DigiMediaStore_HostAddress}}/Media/
-Content-Type: application/x-www-form-urlencoded
+### Создать новый медиа-контент
+POST {{DigiMediaStore_HostAddress}}/api/Media/
+Content-Type: application/json
 
-index=0&name=Updated Movie Title
+{
+  "title": "Новый фильм",
+  "description": "Описание нового фильма",
+  "duration": "02:30:00",
+  "releaseDate": "2024-01-01",
+  "typeId": 1,
+  "basePrice": 9.99,
+  "isAvailable": true
+}
 
-### Удалить медиа-название по индексу
-DELETE {{DigiMediaStore_HostAddress}}/Media/
-Content-Type: application/x-www-form-urlencoded
+### Обновить медиа-контент
+PUT {{DigiMediaStore_HostAddress}}/api/Media/1
+Content-Type: application/json
 
-index=0
+{
+  "contentId": 1,
+  "title": "Обновленное название",
+  "description": "Обновленное описание",
+  "duration": "02:30:00",
+  "releaseDate": "2024-01-01",
+  "typeId": 1,
+  "basePrice": 12.99,
+  "isAvailable": true
+}
+
+### Удалить медиа-контент
+DELETE {{DigiMediaStore_HostAddress}}/api/Media/1
+Accept: application/json
+
+### Получить всех пользователей
+GET {{DigiMediaStore_HostAddress}}/api/User/
+Accept: application/json
+
+### Получить пользователя по ID
+GET {{DigiMediaStore_HostAddress}}/api/User/1
+Accept: application/json
+
+### Создать нового пользователя
+POST {{DigiMediaStore_HostAddress}}/api/User/
+Content-Type: application/json
+
+{
+  "email": "test@example.com",
+  "passwordHash": "hashedpassword123",
+  "fullName": "Тестовый Пользователь",
+  "isActive": true
+}
+
+### Обновить пользователя
+PUT {{DigiMediaStore_HostAddress}}/api/User/
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "email": "updated@example.com",
+  "passwordHash": "newhashedpassword123",
+  "fullName": "Обновленный Пользователь",
+  "isActive": true
+}
+
+### Удалить пользователя
+DELETE {{DigiMediaStore_HostAddress}}/api/User/1
+Accept: application/json
+
+### Получить все модели (для отображения в Swagger Schemas)
+GET {{DigiMediaStore_HostAddress}}/api/Schema/models
+Accept: application/json
 
 ###
