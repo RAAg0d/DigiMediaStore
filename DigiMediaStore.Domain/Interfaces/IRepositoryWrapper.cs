@@ -1,7 +1,6 @@
-using DigiMediaStore.DataAccess.Interfaces;
-using DigiMediaStore.DataAccess.Models;
+using DigiMediaStore.Domain.Models;
 
-namespace DigiMediaStore.DataAccess.Wrapper;
+namespace DigiMediaStore.Domain.Interfaces;
 
 public interface IRepositoryWrapper
 {
@@ -14,5 +13,5 @@ public interface IRepositoryWrapper
     IRepositoryBase<Payment> Payment { get; }
     IRepositoryBase<OrderItem> OrderItem { get; }
     IRepositoryBase<PriceOption> PriceOption { get; }
-    void Save();
+    Task Save();
 }

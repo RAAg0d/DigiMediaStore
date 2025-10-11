@@ -1,7 +1,6 @@
 using DigiMediaStore.Domain.Models;
-using DigiMediaStore.Domain.Interfaces;
 
-namespace DigiMediaStore.BusinessLogic.Interfaces;
+namespace DigiMediaStore.Domain.Interfaces;
 
 public interface IUserService
 {

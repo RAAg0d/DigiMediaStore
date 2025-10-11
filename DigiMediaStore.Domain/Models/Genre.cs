@@ -1,11 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
-namespace DigiMediaStore.DataAccess.Models;
+namespace DigiMediaStore.Domain.Models;
 
-public partial class ContentType
+public partial class Genre
 {
-    public int TypeId { get; set; }
+    public int GenreId { get; set; }
 
     public string Name { get; set; } = null!;
 

@@ -1,4 +1,5 @@
-using DigiMediaStore.DataAccess.Interfaces;
+using DigiMediaStore.Domain.Interfaces;
+using DigiMediaStore.Domain.Models;
 using DigiMediaStore.DataAccess.Models;
 
 namespace DigiMediaStore.DataAccess.Repositories;

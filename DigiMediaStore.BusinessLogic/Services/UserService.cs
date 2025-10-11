@@ -1,7 +1,5 @@
-using DigiMediaStore.BusinessLogic.Interfaces;
-using DigiMediaStore.DataAccess.Models;
-using DigiMediaStore.DataAccess.Wrapper;
-using Microsoft.EntityFrameworkCore;
+using DigiMediaStore.Domain.Interfaces;
+using DigiMediaStore.Domain.Models;
 
 namespace DigiMediaStore.BusinessLogic.Services;
 
@@ -14,39 +12,36 @@ public class UserService : IUserService
         _repositoryWrapper = repositoryWrapper;
     }
 
-    public Task<List<User>> GetAll()
+    public async Task<List<User>> GetAll()
     {
-        return _repositoryWrapper.User.FindAll().ToListAsync();
+        var users = await _repositoryWrapper.User.FindAll();
+        return users.ToList();
     }
 
-    public Task<User> GetById(int id)
+    public async Task<User> GetById(int id)
     {
-        var user = _repositoryWrapper.User
-            .FindByCondition(x => x.UserId == id).First();
-        return Task.FromResult(user);
+        var users = await _repositoryWrapper.User.FindByCondition(x => x.UserId == id);
+        return users.First();
     }
 
-    public Task Create(User model)
+    public async Task Create(User model)
     {
-        _repositoryWrapper.User.Create(model);
-        _repositoryWrapper.Save();
-        return Task.CompletedTask;
+        await _repositoryWrapper.User.Create(model);
+        await _repositoryWrapper.Save();
     }
 
-    public Task Update(User model)
+    public async Task Update(User model)
     {
-        _repositoryWrapper.User.Update(model);
-        _repositoryWrapper.Save();
-        return Task.CompletedTask;
+        await _repositoryWrapper.User.Update(model);
+        await _repositoryWrapper.Save();
     }
 
-    public Task Delete(int id)
+    public async Task Delete(int id)
     {
-        var user = _repositoryWrapper.User
-            .FindByCondition(x => x.UserId == id).First();
+        var users = await _repositoryWrapper.User.FindByCondition(x => x.UserId == id);
+        var user = users.First();
         
-        _repositoryWrapper.User.Delete(user);
-        _repositoryWrapper.Save();
-        return Task.CompletedTask;
+        await _repositoryWrapper.User.Delete(user);
+        await _repositoryWrapper.Save();
     }
 }

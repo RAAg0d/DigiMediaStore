@@ -1,4 +1,4 @@
-using DigiMediaStore.DataAccess.Models;
+using DigiMediaStore.Domain.Models;
 using DigiMediaStore.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,7 +9,13 @@ namespace DigiMediaStore.Controllers;
 [ApiExplorerSettings(IgnoreApi = true)] // Скрываем от Swagger UI
 public class HiddenSchemaController : ControllerBase
 {
+    /// <summary>
+    /// Получить все модели для отображения в Swagger Schemas
+    /// </summary>
+    /// <returns>Объект со всеми моделями системы</returns>
+    /// <response code="200">Модели успешно получены</response>
     [HttpGet("all-models")]
+    [ProducesResponseType(200)]
     public IActionResult GetAllModels()
     {
         // Этот контроллер нужен только для того, чтобы Swagger увидел все модели

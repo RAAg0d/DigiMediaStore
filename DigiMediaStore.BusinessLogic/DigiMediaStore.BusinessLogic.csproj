@@ -2,7 +2,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DigiMediaStore.Domain\DigiMediaStore.Domain.csproj" />
-    <ProjectReference Include="..\DigiMediaStore.DataAccess\DigiMediaStore.DataAccess.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

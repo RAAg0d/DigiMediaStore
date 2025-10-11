@@ -1,4 +1,5 @@
-using DigiMediaStore.DataAccess.Interfaces;
+using DigiMediaStore.Domain.Interfaces;
+using DigiMediaStore.Domain.Models;
 using DigiMediaStore.DataAccess.Models;
 using DigiMediaStore.DataAccess.Repositories;
 
@@ -130,8 +131,8 @@ public class RepositoryWrapper : IRepositoryWrapper
         }
     }
 
-    public void Save()
+    public async Task Save()
     {
-        _repoContext.SaveChanges();
+        await _repoContext.SaveChangesAsync();
     }
 }

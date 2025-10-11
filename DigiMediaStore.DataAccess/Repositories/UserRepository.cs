@@ -1,4 +1,5 @@
-using DigiMediaStore.DataAccess.Interfaces;
+using DigiMediaStore.Domain.Interfaces;
+using DigiMediaStore.Domain.Models;
 using DigiMediaStore.DataAccess.Models;
 
 namespace DigiMediaStore.DataAccess.Repositories;
@@ -9,18 +10,20 @@ public class UserRepository : RepositoryBase<User>, IUserRepository
     {
     }
 
-    public User? GetByEmail(string email)
+    public async Task<User?> GetByEmail(string email)
     {
-        return FindByCondition(x => x.Email == email).FirstOrDefault();
+        var users = await FindByCondition(x => x.Email == email);
+        return users.FirstOrDefault();
     }
 
-    public bool EmailExists(string email)
+    public async Task<bool> EmailExists(string email)
     {
-        return FindByCondition(x => x.Email == email).Any();
+        var users = await FindByCondition(x => x.Email == email);
+        return users.Any();
     }
 
-    public IEnumerable<User> GetActiveUsers()
+    public async Task<IEnumerable<User>> GetActiveUsers()
     {
-        return FindByCondition(x => x.IsActive == true);
+        return await FindByCondition(x => x.IsActive == true);
     }
 }

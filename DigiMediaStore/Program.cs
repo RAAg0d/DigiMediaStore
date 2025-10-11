@@ -1,10 +1,12 @@
 
-using DigiMediaStore.BusinessLogic.Interfaces;
+using DigiMediaStore.Domain.Interfaces;
 using DigiMediaStore.BusinessLogic.Services;
 using DigiMediaStore.DataAccess;
 using DigiMediaStore.DataAccess.Models;
 using DigiMediaStore.DataAccess.Wrapper;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,13 +14,28 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(c =>
+builder.Services.AddSwaggerGen(options =>
 {
-    c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo 
-    { 
-        Title = "DigiMediaStore API", 
-        Version = "v1" 
+    options.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Version = "v1",
+        Title = "DigiMediaStore API",
+        Description = "API для цифрового медиа-магазина с поддержкой пользователей, контента и заказов",
+        Contact = new OpenApiContact
+        {
+            Name = "DigiMediaStore Support",
+            Url = new Uri("https://github.com/DigiMediaStore/support")
+        },
+        License = new OpenApiLicense
+        {
+            Name = "MIT License",
+            Url = new Uri("https://opensource.org/licenses/MIT")
+        }
     });
+    
+    // Включаем XML комментарии
+    var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
 });
 
 // Database configuration

@@ -1,4 +1,5 @@
-using DigiMediaStore.DataAccess.Interfaces;
+using DigiMediaStore.Domain.Interfaces;
+using DigiMediaStore.Domain.Models;
 using DigiMediaStore.DataAccess.Models;
 
 namespace DigiMediaStore.DataAccess.Repositories;
@@ -9,23 +10,24 @@ public class OrderRepository : RepositoryBase<Order>, IOrderRepository
     {
     }
 
-    public IEnumerable<Order> GetByUserId(int userId)
+    public async Task<IEnumerable<Order>> GetByUserId(int userId)
     {
-        return FindByCondition(x => x.UserId == userId);
+        return await FindByCondition(x => x.UserId == userId);
     }
 
-    public IEnumerable<Order> GetByStatus(string status)
+    public async Task<IEnumerable<Order>> GetByStatus(string status)
     {
-        return FindByCondition(x => x.Status == status);
+        return await FindByCondition(x => x.Status == status);
     }
 
-    public decimal GetTotalRevenue()
+    public async Task<decimal> GetTotalRevenue()
     {
-        return FindByCondition(x => x.Status == "Completed").Sum(x => x.TotalAmount);
+        var orders = await FindByCondition(x => x.Status == "Completed");
+        return orders.Sum(x => x.TotalAmount);
     }
 
-    public IEnumerable<Order> GetOrdersByDateRange(DateTime startDate, DateTime endDate)
+    public async Task<IEnumerable<Order>> GetOrdersByDateRange(DateTime startDate, DateTime endDate)
     {
-        return FindByCondition(x => x.OrderDate >= startDate && x.OrderDate <= endDate);
+        return await FindByCondition(x => x.OrderDate >= startDate && x.OrderDate <= endDate);
     }
 }
