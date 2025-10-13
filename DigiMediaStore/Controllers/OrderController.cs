@@ -6,12 +6,19 @@ using Mapster;
 
 namespace DigiMediaStore.Controllers;
 
+/// <summary>
+/// Контроллер для управления заказами
+/// </summary>
 [Route("api/[controller]")]
 [ApiController]
 public class OrderController : ControllerBase
 {
     private IRepositoryWrapper _repositoryWrapper;
     
+    /// <summary>
+    /// Конструктор контроллера заказов
+    /// </summary>
+    /// <param name="repositoryWrapper">Обертка репозиториев</param>
     public OrderController(IRepositoryWrapper repositoryWrapper)
     {
         _repositoryWrapper = repositoryWrapper;
@@ -70,6 +77,19 @@ public class OrderController : ControllerBase
     /// <summary>
     /// Создать новый заказ
     /// </summary>
+    /// <remarks>
+    /// Пример запроса:
+    ///
+    ///     POST /Order
+    ///     {
+    ///        "userId": 1,
+    ///        "totalAmount": 599.98,
+    ///        "status": "Pending",
+    ///        "orderDate": "2024-01-15T10:30:00Z",
+    ///        "notes": "Срочный заказ"
+    ///     }
+    ///
+    /// </remarks>
     /// <param name="request">Данные для создания заказа</param>
     /// <returns>Результат создания</returns>
     /// <response code="200">Заказ успешно создан</response>
@@ -88,6 +108,20 @@ public class OrderController : ControllerBase
     /// <summary>
     /// Обновить данные заказа
     /// </summary>
+    /// <remarks>
+    /// Пример запроса:
+    ///
+    ///     PUT /Order
+    ///     {
+    ///        "orderId": 1,
+    ///        "userId": 1,
+    ///        "totalAmount": 699.99,
+    ///        "status": "Completed",
+    ///        "orderDate": "2024-01-15T10:30:00Z",
+    ///        "notes": "Заказ выполнен"
+    ///     }
+    ///
+    /// </remarks>
     /// <param name="request">Данные для обновления заказа</param>
     /// <returns>Результат обновления</returns>
     /// <response code="200">Заказ успешно обновлен</response>

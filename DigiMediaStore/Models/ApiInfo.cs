@@ -1,5 +1,8 @@
 namespace DigiMediaStore.Models;
 
+/// <summary>
+/// Информация об API
+/// </summary>
 public class ApiInfo
 {
     public string Name { get; set; } = "DigiMediaStore API";

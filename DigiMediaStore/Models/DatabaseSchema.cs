@@ -1,5 +1,8 @@
 namespace DigiMediaStore.Models;
 
+/// <summary>
+/// Схема базы данных
+/// </summary>
 public class DatabaseSchema
 {
     public string DatabaseName { get; set; } = "DigiMediaStore";

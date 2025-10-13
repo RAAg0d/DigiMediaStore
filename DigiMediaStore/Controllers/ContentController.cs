@@ -6,12 +6,19 @@ using Mapster;
 
 namespace DigiMediaStore.Controllers;
 
+/// <summary>
+/// Контроллер для управления контентом
+/// </summary>
 [Route("api/[controller]")]
 [ApiController]
 public class ContentController : ControllerBase
 {
     private IRepositoryWrapper _repositoryWrapper;
     
+    /// <summary>
+    /// Конструктор контроллера контента
+    /// </summary>
+    /// <param name="repositoryWrapper">Обертка репозиториев</param>
     public ContentController(IRepositoryWrapper repositoryWrapper)
     {
         _repositoryWrapper = repositoryWrapper;
@@ -55,6 +62,23 @@ public class ContentController : ControllerBase
     /// <summary>
     /// Создать новый контент
     /// </summary>
+    /// <remarks>
+    /// Пример запроса:
+    ///
+    ///     POST /Content
+    ///     {
+    ///        "title": "Новый фильм",
+    ///        "description": "Описание фильма",
+    ///        "contentTypeId": 1,
+    ///        "genreId": 1,
+    ///        "price": 299.99,
+    ///        "filePath": "/movies/new_movie.mp4",
+    ///        "coverImageUrl": "https://example.com/cover.jpg",
+    ///        "releaseDate": "2024-01-01T00:00:00Z",
+    ///        "isActive": true
+    ///     }
+    ///
+    /// </remarks>
     /// <param name="request">Данные для создания контента</param>
     /// <returns>Результат создания</returns>
     /// <response code="200">Контент успешно создан</response>
@@ -73,6 +97,24 @@ public class ContentController : ControllerBase
     /// <summary>
     /// Обновить данные контента
     /// </summary>
+    /// <remarks>
+    /// Пример запроса:
+    ///
+    ///     PUT /Content
+    ///     {
+    ///        "contentId": 1,
+    ///        "title": "Обновленный фильм",
+    ///        "description": "Новое описание фильма",
+    ///        "contentTypeId": 1,
+    ///        "genreId": 2,
+    ///        "price": 399.99,
+    ///        "filePath": "/movies/updated_movie.mp4",
+    ///        "coverImageUrl": "https://example.com/new_cover.jpg",
+    ///        "releaseDate": "2024-02-01T00:00:00Z",
+    ///        "isActive": true
+    ///     }
+    ///
+    /// </remarks>
     /// <param name="request">Данные для обновления контента</param>
     /// <returns>Результат обновления</returns>
     /// <response code="200">Контент успешно обновлен</response>

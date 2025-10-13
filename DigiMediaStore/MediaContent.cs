@@ -1,5 +1,8 @@
 namespace DigiMediaStore;
 
+/// <summary>
+/// Модель медиа-контента
+/// </summary>
 public class MediaContent
 {
     public int Id { get; set; }

@@ -7,12 +7,19 @@ using Mapster;
 
 namespace DigiMediaStore.Controllers;
 
+/// <summary>
+/// Контроллер для управления пользователями
+/// </summary>
 [Route("api/[controller]")]
 [ApiController]
 public class UserController : ControllerBase
 {
     private IUserService _userService;
     
+    /// <summary>
+    /// Конструктор контроллера пользователей
+    /// </summary>
+    /// <param name="userService">Сервис пользователей</param>
     public UserController(IUserService userService)
     {
         _userService = userService;
@@ -52,6 +59,17 @@ public class UserController : ControllerBase
     /// <summary>
     /// Создать нового пользователя
     /// </summary>
+    /// <remarks>
+    /// Пример запроса:
+    ///
+    ///     POST /User
+    ///     {
+    ///        "email": "user@example.com",
+    ///        "passwordHash": "hashed_password_here",
+    ///        "fullName": "Иван Иванов"
+    ///     }
+    ///
+    /// </remarks>
     /// <param name="request">Данные для создания пользователя</param>
     /// <returns>Результат создания</returns>
     /// <response code="200">Пользователь успешно создан</response>
@@ -69,6 +87,19 @@ public class UserController : ControllerBase
     /// <summary>
     /// Обновить данные пользователя
     /// </summary>
+    /// <remarks>
+    /// Пример запроса:
+    ///
+    ///     PUT /User
+    ///     {
+    ///        "userId": 1,
+    ///        "email": "updated@example.com",
+    ///        "passwordHash": "new_hashed_password",
+    ///        "fullName": "Иван Петров",
+    ///        "isActive": true
+    ///     }
+    ///
+    /// </remarks>
     /// <param name="request">Данные для обновления пользователя</param>
     /// <returns>Результат обновления</returns>
     /// <response code="200">Пользователь успешно обновлен</response>
