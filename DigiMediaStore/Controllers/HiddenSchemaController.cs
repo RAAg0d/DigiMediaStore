@@ -12,6 +12,10 @@ public class HiddenSchemaController : ControllerBase
     /// <summary>
     /// Получить все модели для отображения в Swagger Schemas
     /// </summary>
+    /// <remarks>
+    /// Этот endpoint используется только для того, чтобы Swagger увидел все модели системы
+    /// и добавил их в раздел Schemas. Сам endpoint скрыт от пользовательского интерфейса.
+    /// </remarks>
     /// <returns>Объект со всеми моделями системы</returns>
     /// <response code="200">Модели успешно получены</response>
     [HttpGet("all-models")]
