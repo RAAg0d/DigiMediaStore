@@ -14,7 +14,7 @@ namespace DigiMediaStore.Controllers;
 public class GenreController : ControllerBase
 {
     private IRepositoryWrapper _repositoryWrapper;
-    
+
     /// <summary>
     /// Конструктор контроллера жанров
     /// </summary>
@@ -54,7 +54,7 @@ public class GenreController : ControllerBase
         var result = genre.FirstOrDefault();
         if (result == null)
             return NotFound();
-        
+
         var response = result.Adapt<GetGenreResponse>();
         return Ok(response);
     }
@@ -134,7 +134,7 @@ public class GenreController : ControllerBase
         var result = genre.FirstOrDefault();
         if (result == null)
             return NotFound();
-            
+
         await _repositoryWrapper.Genre.Delete(result);
         await _repositoryWrapper.Save();
         return Ok();

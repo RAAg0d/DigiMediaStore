@@ -1,4 +1,4 @@
-﻿namespace DigiMediaStore.Domain;
+namespace DigiMediaStore.Domain;
 
 public class Class1
 {

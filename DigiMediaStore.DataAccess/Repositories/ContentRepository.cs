@@ -22,7 +22,7 @@ public class ContentRepository : RepositoryBase<Content>, IContentRepository
 
     public async Task<IEnumerable<Content>> Search(string searchTerm)
     {
-        return await FindByCondition(x => x.Title.Contains(searchTerm) || 
+        return await FindByCondition(x => x.Title.Contains(searchTerm) ||
                                    (x.Description != null && x.Description.Contains(searchTerm)));
     }
 

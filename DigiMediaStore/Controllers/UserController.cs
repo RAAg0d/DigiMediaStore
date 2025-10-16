@@ -15,7 +15,7 @@ namespace DigiMediaStore.Controllers;
 public class UserController : ControllerBase
 {
     private IUserService _userService;
-    
+
     /// <summary>
     /// Конструктор контроллера пользователей
     /// </summary>

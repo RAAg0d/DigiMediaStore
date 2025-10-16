@@ -14,7 +14,7 @@ namespace DigiMediaStore.Controllers;
 public class ReviewController : ControllerBase
 {
     private IRepositoryWrapper _repositoryWrapper;
-    
+
     /// <summary>
     /// Конструктор контроллера отзывов
     /// </summary>
@@ -54,7 +54,7 @@ public class ReviewController : ControllerBase
         var result = review.FirstOrDefault();
         if (result == null)
             return NotFound();
-        
+
         var response = result.Adapt<GetReviewResponse>();
         return Ok(response);
     }
@@ -170,7 +170,7 @@ public class ReviewController : ControllerBase
         var result = review.FirstOrDefault();
         if (result == null)
             return NotFound();
-            
+
         await _repositoryWrapper.Review.Delete(result);
         await _repositoryWrapper.Save();
         return Ok();

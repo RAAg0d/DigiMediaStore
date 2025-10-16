@@ -14,7 +14,7 @@ namespace DigiMediaStore.Controllers;
 public class ContentController : ControllerBase
 {
     private IRepositoryWrapper _repositoryWrapper;
-    
+
     /// <summary>
     /// Конструктор контроллера контента
     /// </summary>
@@ -54,7 +54,7 @@ public class ContentController : ControllerBase
         var result = content.FirstOrDefault();
         if (result == null)
             return NotFound();
-        
+
         var response = result.Adapt<GetContentResponse>();
         return Ok(response);
     }
@@ -148,7 +148,7 @@ public class ContentController : ControllerBase
         var result = content.FirstOrDefault();
         if (result == null)
             return NotFound();
-            
+
         await _repositoryWrapper.Content.Delete(result);
         await _repositoryWrapper.Save();
         return Ok();

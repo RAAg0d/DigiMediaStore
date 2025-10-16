@@ -1,4 +1,4 @@
-﻿namespace DigiMediaStore.DataAccess;
+namespace DigiMediaStore.DataAccess;
 
 public class Class1
 {

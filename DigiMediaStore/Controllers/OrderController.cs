@@ -14,7 +14,7 @@ namespace DigiMediaStore.Controllers;
 public class OrderController : ControllerBase
 {
     private IRepositoryWrapper _repositoryWrapper;
-    
+
     /// <summary>
     /// Конструктор контроллера заказов
     /// </summary>
@@ -54,7 +54,7 @@ public class OrderController : ControllerBase
         var result = order.FirstOrDefault();
         if (result == null)
             return NotFound();
-        
+
         var response = result.Adapt<GetOrderResponse>();
         return Ok(response);
     }
@@ -155,7 +155,7 @@ public class OrderController : ControllerBase
         var result = order.FirstOrDefault();
         if (result == null)
             return NotFound();
-            
+
         await _repositoryWrapper.Order.Delete(result);
         await _repositoryWrapper.Save();
         return Ok();

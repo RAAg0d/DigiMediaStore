@@ -1,4 +1,4 @@
-﻿namespace DigiMediaStore.BusinessLogic;
+namespace DigiMediaStore.BusinessLogic;
 
 public class Class1
 {

@@ -44,7 +44,7 @@ public class UserService : IUserService
     {
         var users = await _repositoryWrapper.User.FindByCondition(x => x.UserId == id);
         var user = users.First();
-        
+
         await _repositoryWrapper.User.Delete(user);
         await _repositoryWrapper.Save();
     }

@@ -37,7 +37,7 @@ public class HiddenSchemaController : ControllerBase
             PriceOption = new PriceOption(),
             DatabaseSchema = new DatabaseSchema()
         };
-        
+
         return Ok(models);
     }
 }
