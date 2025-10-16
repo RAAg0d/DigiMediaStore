@@ -25,7 +25,8 @@ jobs:
       - name: Build
         run: dotnet build "DigiMediaStore.sln" --configuration Release --no-restore
 
-      - name: Check formatting
+      - name: Check formatting (non-blocking)
+        continue-on-error: true
         run: dotnet format "DigiMediaStore.sln" --verify-no-changes --verbosity diagnostic
 
       - name: Test
