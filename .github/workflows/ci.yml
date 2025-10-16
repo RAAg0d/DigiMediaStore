@@ -26,7 +26,7 @@ jobs:
         run: dotnet build "DigiMediaStore.sln" --configuration Release --no-restore
 
       - name: Check formatting
-        run: dotnet format --folder --check --verbosity diagnostic
+        run: dotnet format "DigiMediaStore.sln" --verify-no-changes --verbosity diagnostic
 
       - name: Test
         run: dotnet test "DigiMediaStore.sln" --configuration Release --no-build
