@@ -26,6 +26,10 @@ public class UserService : IUserService
 
     public async Task Create(User model)
     {
+        if (model is null)
+            throw new ArgumentNullException(nameof(model));
+        if (string.IsNullOrWhiteSpace(model.Email) || string.IsNullOrWhiteSpace(model.PasswordHash) || string.IsNullOrWhiteSpace(model.FullName))
+            throw new ArgumentException("User fields Email, PasswordHash and FullName are required");
         await _repositoryWrapper.User.Create(model);
         await _repositoryWrapper.Save();
     }
