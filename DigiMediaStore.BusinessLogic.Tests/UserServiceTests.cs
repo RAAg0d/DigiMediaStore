@@ -3,6 +3,10 @@ using DigiMediaStore.Domain.Interfaces;
 using DigiMediaStore.Domain.Models;
 using FluentAssertions;
 using Moq;
+using Xunit;
+using System;
+using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace DigiMediaStore.BusinessLogic.Tests;
 
