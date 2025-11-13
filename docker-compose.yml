@@ -1,0 +1,63 @@
+services:
+  # PostgreSQL база данных
+  postgres:
+    image: postgres:15-alpine
+    container_name: digimediasotre-db
+    environment:
+      POSTGRES_DB: DigiMediaStore
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - digimediasotre-network
+
+  # ASP.NET Core API
+  api:
+    build:
+      context: .
+      dockerfile: DigiMediaStore/Dockerfile
+    container_name: digimediasotre-api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:8080
+      - ConnectionStrings__DefaultConnection=Host=postgres;Database=DigiMediaStore;Username=postgres;Password=postgres
+    ports:
+      - "8080:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - digimediasotre-network
+    restart: unless-stopped
+
+  # React Frontend
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: digimediasotre-frontend
+    environment:
+      - REACT_APP_API_URL=http://localhost:8080
+    ports:
+      - "3000:80"
+    depends_on:
+      - api
+    networks:
+      - digimediasotre-network
+    restart: unless-stopped
+
+networks:
+  digimediasotre-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
+

@@ -14,6 +14,18 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+
+// Add CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", policy =>
+    {
+        policy.AllowAnyOrigin()
+              .AllowAnyMethod()
+              .AllowAnyHeader();
+    });
+});
+
 builder.Services.AddSwaggerGen(options =>
 {
     options.SwaggerDoc("v1", new OpenApiInfo
@@ -50,8 +62,7 @@ builder.Services.AddScoped<IUserService, UserService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
+// Включаем Swagger для всех окружений (включая Docker)
     app.UseSwagger();
     app.UseSwaggerUI(c =>
     {
@@ -60,9 +71,12 @@ if (app.Environment.IsDevelopment())
         c.DisplayRequestDuration();
         c.DocExpansion(Swashbuckle.AspNetCore.SwaggerUI.DocExpansion.List);
     });
-}
 
-app.UseHttpsRedirection();
+// Используем CORS
+app.UseCors("AllowAll");
+
+// Отключаем HTTPS редирект для Docker (можно включить при необходимости)
+// app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
